@@ -1,3 +1,4 @@
+import client.helper.RoundUpCalcHelper;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,13 +12,13 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class RoundUpCalcTest {
 
     @Test
-    public void shouldRoundNubmerUpToTwoDP(){
+    public void shouldRoundNumberUpToTwoDP(){
         //Given an example of more than 2 decimal places below 0.005
         List<Double> listOfSpending = new ArrayList<>();
         listOfSpending.add(5.753);
 
         //When rounding
-        double roundNum = RoundUpCalc.getRoundNumber(listOfSpending);
+        double roundNum = RoundUpCalcHelper.getRoundNumber(listOfSpending);
 
         //Then should round up
         assertThat(roundNum, equalTo(0.25));
@@ -30,12 +31,11 @@ public class RoundUpCalcTest {
         listOfSpending.add(5.757);
 
         //When rounding
-        double roundNum = RoundUpCalc.getRoundNumber(listOfSpending);
+        double roundNum = RoundUpCalcHelper.getRoundNumber(listOfSpending);
 
         //Then should round down
         assertThat(roundNum, equalTo(0.24));
     }
-
 
     @Test
     public void shouldRoundNumberFromGivenExample(){
@@ -46,12 +46,26 @@ public class RoundUpCalcTest {
         listOfSpending.add(0.87);
 
         //When rounding
-        double roundNum = RoundUpCalc.getRoundNumber(listOfSpending);
+        double roundNum = RoundUpCalcHelper.getRoundNumber(listOfSpending);
 
         //Then should return correct value
         assertThat(roundNum, equalTo(1.58));
     }
 
+    @Test
+    public void shouldRoundNumberFromGivenNegativeExample(){
+        //Given an example of spendings £4.35, £5.20 and £0.87
+        List<Double> listOfSpending = new ArrayList<>();
+        listOfSpending.add(-4.35);
+        listOfSpending.add(-5.20);
+        listOfSpending.add(-0.87);
+
+        //When rounding
+        double roundNum = RoundUpCalcHelper.getRoundNumber(listOfSpending);
+
+        //Then should return correct value
+        assertThat(roundNum, equalTo(1.58));
+    }
 
     @Test
     public void shouldShowZeroForZeroSpending() {
@@ -62,7 +76,7 @@ public class RoundUpCalcTest {
         listOfSpending.add(0.);
 
         //When rounding
-        double roundNum = RoundUpCalc.getRoundNumber(listOfSpending);
+        double roundNum = RoundUpCalcHelper.getRoundNumber(listOfSpending);
 
         //Then
         assertThat(roundNum, equalTo(0.0));

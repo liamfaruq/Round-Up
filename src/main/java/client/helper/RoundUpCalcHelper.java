@@ -1,3 +1,5 @@
+package client.helper;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -5,8 +7,7 @@ import java.util.List;
 /**
  * Created by Liam on 17/02/2019.
  */
-public class RoundUpCalc {
-
+public class RoundUpCalcHelper {
 
     public static double getRoundNumber(List<Double> transactionRoundUpList){
         double acc = 0;
@@ -14,6 +15,7 @@ public class RoundUpCalc {
         DecimalFormat df2 = new DecimalFormat(".##");
 
         for (Double amount : transactionRoundUpList){
+            amount = Math.abs(amount);
             accRound+=Math.ceil(amount);
             acc+=amount;
         }
@@ -23,7 +25,5 @@ public class RoundUpCalc {
 
         return(roundNumber);
     }
-
-
 
 }
